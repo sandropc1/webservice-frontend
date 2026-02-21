@@ -9,13 +9,14 @@ export default function CategoriesPage() {
   const navigate = useNavigate();
 
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoadingList] = useState(false);
   const [error, setError] = useState("");
+  const [searchId, setSearchId] = useState("");
 
   async function loadCategories() {
     try {
       setError("");
-      setLoading(true);
+      setLoadingList(true);
 
       const res = await fetch(`${baseURL}/categories`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -28,7 +29,32 @@ export default function CategoriesPage() {
     } catch (e) {
       setError(e?.message || "Erro ao carregar categorias");
     } finally {
-      setLoading(false);
+      setLoadingList(false);
+    }
+  }
+
+  async function findCategoryById() {
+    if (!searchId) {
+      await loadCategories();
+      return;
+    }
+
+    try {
+      setError("");
+      setLoadingList(true);
+
+      const res = await fetch(`${baseURL}/categories/${searchId}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      const category = await res.json();
+
+      // Coloca o usuário encontrado na lista
+      setCategories([category]);
+    } catch (e) {
+      setError(e?.message || "Category not found");
+      setCategories([]);
+    } finally {
+      setLoadingList(false);
     }
   }
 
@@ -37,17 +63,30 @@ export default function CategoriesPage() {
       <div class="flex flex-col flex-grow m-12 p-6 max-w-5xl mx-auto">
         <h2 class="flex justify-center">Categories</h2>
 
+        <div className="flex gap-2 justify-center my-4">
+          <input
+            type="number"
+            placeholder="Search for ID"
+            value={searchId}
+            onChange={(e) => setSearchId(e.target.value)}
+            class="border p-2 rounded"
+          />
+
+          <Button onClick={findCategoryById}>Search</Button>
+        </div>
+
+        <div class="border bg-gray-200 m-9 min-inline-xs">
+          <Categories categories={categories} />
+        </div>
+
         <Button
           onClick={loadCategories}
           disabled={loading}
           style={{ padding: "8px 12px" }}
         >
-          {loading ? "Carregando..." : "Carregar categorias"}
+          {loading ? "Carregando..." : "Load categories"}
         </Button>
 
-        <div class="border bg-gray-200 m-9 min-inline-xs">
-          <Categories categories={categories} />
-        </div>
       </div>
       <Footer />
     </div>

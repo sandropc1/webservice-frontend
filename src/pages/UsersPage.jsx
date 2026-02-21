@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import baseURL from "../routes/api.js";
 
 export default function UsersPage() {
+
   const [users, setUsers] = useState([]);
   const [loadingList, setLoadingList] = useState(false);
   const [creating, setCreating] = useState(false);
@@ -81,7 +82,7 @@ export default function UsersPage() {
       // Coloca o usuário encontrado na lista
       setUsers([user]);
     } catch (e) {
-      setError(e?.message || "Usuário não encontrado");
+      setError(e?.message || "User not found");
       setUsers([]);
     } finally {
       setLoadingList(false);
@@ -91,18 +92,18 @@ export default function UsersPage() {
   return (
     <div class="min-h-screen flex flex-col">
       <div class="flex flex-col flex-grow m-12 p-6 max-w-5xl mx-auto">
-        <h2 class="flex justify-center">Usuários</h2>
+        <h2 class="flex justify-center">Users</h2>
 
         <div className="flex gap-2 justify-center my-4">
           <input
             type="number"
-            placeholder="Buscar por ID"
+            placeholder="Search for ID"
             value={searchId}
             onChange={(e) => setSearchId(e.target.value)}
             class="border p-2 rounded"
           />
 
-          <Button onClick={findUserById}>Buscar</Button>
+          <Button onClick={findUserById}>Search</Button>
         </div>
 
         <div class="flex justify-center">
@@ -110,7 +111,7 @@ export default function UsersPage() {
             <CreateUserForm onSubmit={createUser} loading={creating} />
           )}
 
-          <div class="border bg-gray-200 m-9 min-inline-4xs max-inline-4xs">
+          <div class="border bg-gray-200 m-9 min-inline-xs">
             <Users users={users} />
           </div>
         </div>

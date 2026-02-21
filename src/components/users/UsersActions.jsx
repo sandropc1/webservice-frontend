@@ -15,7 +15,7 @@ export default function UsersActions({
         disabled={loading || creating}
         style={{ padding: "8px 12px" }}
       >
-        {loading ? "Carregando..." : "Carregar usuários"}
+        {loading ? "Carregando..." : "Load users"}
       </Button>
 
       <Button
@@ -23,7 +23,7 @@ export default function UsersActions({
         disabled={creating}
         style={{ padding: "8px 12px" }}
       >
-        {showForm ? "Fechar cadastro" : "Adicionar usuário"}
+        {showForm ? "Fechar cadastro" : "Add user"}
       </Button>
 
     </div>
