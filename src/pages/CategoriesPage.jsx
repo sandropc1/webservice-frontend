@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Categories from "../components/Categories.jsx";
+import Button from "../components/buttons/Button";
+import Footer from "../components/Footer";
 import baseURL from "../routes/api.js";
 
 export default function CategoriesPage() {
@@ -31,29 +33,23 @@ export default function CategoriesPage() {
   }
 
   return (
-    <div>
-      <h2>Categories</h2>
+    <div class="flex flex-col min-h-screen">
+      <div class="flex flex-col flex-grow m-12 p-6 max-w-5xl mx-auto">
+        <h2 class="flex justify-center">Categories</h2>
 
-      <button
-        onClick={loadCategories}
-        disabled={loading}
-        style={{ padding: "8px 12px" }}
-      >
-        {loading ? "Carregando..." : "Carregar categorias"}
-      </button>
+        <Button
+          onClick={loadCategories}
+          disabled={loading}
+          style={{ padding: "8px 12px" }}
+        >
+          {loading ? "Carregando..." : "Carregar categorias"}
+        </Button>
 
-      {error && <p style={{ color: "crimson" }}>Erro: {error}</p>}
-
-      <div style={{ marginTop: 12 }}>
-        <Categories categories={categories} />
+        <div class="border bg-gray-200 m-9 min-inline-xs">
+          <Categories categories={categories} />
+        </div>
       </div>
-
-      <button
-        onClick={() => navigate("/")}
-        style={{ padding: "6px 10px", marginBottom: 12 }}
-      >
-        Voltar para Home
-      </button>
+      <Footer />
     </div>
   );
 }

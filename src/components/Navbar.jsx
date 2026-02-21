@@ -38,7 +38,7 @@ export default function Navbar() {
         <Link
           to="/categories"
           style={{
-            fontWeight: location.pathname === "/orders" ? "bold" : "normal",
+            fontWeight: location.pathname === "/categories" ? "bold" : "normal",
           }}
         >
           Categories
@@ -46,7 +46,7 @@ export default function Navbar() {
         <Link
           to="/products"
           style={{
-            fontWeight: location.pathname === "/orders" ? "bold" : "normal",
+            fontWeight: location.pathname === "/products" ? "bold" : "normal",
           }}
         >
           Products
