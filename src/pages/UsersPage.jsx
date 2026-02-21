@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Users from "../components/Users.jsx";
 import UsersActions from "../components/users/UsersActions.jsx";
 import CreateUserForm from "../components/users/CreateUserForm.jsx";
+import Button from "../components/buttons/Button";
+import Footer from "../components/Footer";
 import baseURL from "../routes/api.js";
 
 export default function UsersPage() {
@@ -62,34 +64,37 @@ export default function UsersPage() {
   }
 
   return (
-    <div>
-      <h2>Usuários</h2>
+      <div class = "min-h-screen flex flex-col">
+        <div class="flex flex-col flex-grow m-12 p-6 max-w-5xl mx-auto">
+         <h2 class="flex justify-center">Usuários</h2>
 
-      <UsersActions
-        usersCount={users.length}
-        onLoad={loadUsers}
-        onToggleForm={() => setShowForm((v) => !v)}
-        loading={loadingList}
-        creating={creating}
-        showForm={showForm}
-      />
+            <div class="flex justify-center ">
 
-      {error && <p style={{ color: "crimson" }}>Erro: {error}</p>}
+              <UsersActions
+                usersCount={users.length}
+                onLoad={loadUsers}
+                onToggleForm={() => setShowForm((v) => !v)}
+                loading={loadingList}
+                creating={creating}
+                showForm={showForm}
+              />
+            </div>
 
-      {showForm && (
-        <CreateUserForm
-          onSubmit={createUser}
-          loading={creating}
-        />
-      )}
+            <div class="flex justify-center">
+              {showForm && (
+                <CreateUserForm
+                  onSubmit={createUser}
+                  loading={creating}
+                />
+              )}
 
-      <div class="m-12">
-        <Users users={users} />
+            <div class="border bg-gray-200 m-9 min-inline-xs">
+                <Users users={users} />
+            </div>
+
+        </div>
       </div>
-
-      <button id="btn-home" onClick={() => navigate("/")}>
-        Voltar para Home
-      </button>
-    </div>
+      <Footer />
+     </div>
   );
 }

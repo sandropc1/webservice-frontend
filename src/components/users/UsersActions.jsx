@@ -1,3 +1,5 @@
+import Button from "../buttons/Button";
+
 export default function UsersActions({
   usersCount,
   onLoad,
@@ -7,24 +9,23 @@ export default function UsersActions({
   showForm
 }) {
   return (
-    <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-      <button
+    <div class = "flex item-center flex-wrap gap-8 ">
+      <Button
         onClick={onLoad}
         disabled={loading || creating}
         style={{ padding: "8px 12px" }}
       >
         {loading ? "Carregando..." : "Carregar usuários"}
-      </button>
+      </Button>
 
-      <button
+      <Button
         onClick={onToggleForm}
         disabled={creating}
         style={{ padding: "8px 12px" }}
       >
         {showForm ? "Fechar cadastro" : "Adicionar usuário"}
-      </button>
+      </Button>
 
-      <span>Total: {usersCount}</span>
     </div>
   );
 }

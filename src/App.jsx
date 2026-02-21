@@ -10,7 +10,7 @@ import ProductsPage from "./pages/ProductsPage.jsx";
 
 export default function App() {
   return (
-    <div style={{ fontFamily: "sans-serif" }}>
+    <div class="font-sans min-h-screen flex flex-col">
       <Navbar />
       <div>
         <Routes>
@@ -19,7 +19,6 @@ export default function App() {
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/products" element={<ProductsPage />} />
-
         </Routes>
       </div>
     </div>

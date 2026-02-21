@@ -1,10 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
+import logo from "../assets/logo.png"
 
 export default function Navbar() {
   const location = useLocation();
 
   return (
-    <nav class = "text-white bg-slate-800 flex gap-16 p-8 border-b">
+    <nav class = "flex flex-row text-white gap-30 bg-slate-800 p-8 border-b">
+
+    <div class = "flex flex-row items-center">
+      <img src={logo} alt="Logo" className="h-13 w-auto"/>
+      <span class="text-3xl">MarshMallowAPI</span>
+    </div>
+    <div class="flex flex-row items-center gap-12">
       <Link
         to="/"
         style={{ fontWeight: location.pathname === "/" ? "bold" : "normal" }}
@@ -37,6 +44,7 @@ export default function Navbar() {
       >
         Products
       </Link>
+    </div>
     </nav>
   );
 }
